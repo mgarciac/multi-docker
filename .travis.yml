@@ -13,13 +13,11 @@ after_success:
    - docker build -t mgarciac88/multi-nginx ./nginx
    - docker build -t mgarciac88/multi-server ./server
    - docker build -t mgarciac88/multi-worker ./worker
+   # Log in into the docker CLI
+   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 
-# Log in into the docker CLI
-- echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-
-# Take the images ans push them to docker hub...
-- docker push mgarciac88/multi-client
-- docker push mgarciac88/multi-nginx
-- docker push mgarciac88/multi-server
-- docker push mgarciac88/multi-worker
-
+   # Take the images and push them to docker hub...
+   - docker push mgarciac88/multi-client
+   - docker push mgarciac88/multi-nginx
+   - docker push mgarciac88/multi-server
+   - docker push mgarciac88/multi-worker
